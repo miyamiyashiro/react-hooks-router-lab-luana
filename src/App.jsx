@@ -25,3 +25,4 @@ export default function App() {
   { path: "/", label: "Home" },
   { path: "/exercicio-1", label: "01 · Effect: título" },
 ];
+
