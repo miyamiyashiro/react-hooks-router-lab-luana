@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 export default function Ex02Resize() {
-  // Guarda a largura inicial da janela.
+  // Lê a largura inicial da janela ao criar o componente.
   const [largura, setLargura] = useState(window.innerWidth);
 
   useEffect(() => {
@@ -9,18 +9,22 @@ export default function Ex02Resize() {
       setLargura(window.innerWidth);
     }
 
-    // Registra um listener externo ao React.
+    // Inscreve o componente em um evento do navegador.
     window.addEventListener('resize', atualizarLargura);
 
-    // Cleanup remove o mesmo listener na desmontagem.
+    // Cleanup é executado ao sair desta rota.
+    // Evita que um listener antigo continue ativo.
     return () => window.removeEventListener('resize', atualizarLargura);
-  }, []);
+  }, []); // Nenhuma dependência: não precisa reinscrever a cada render.
 
   return (
     <section className="panel">
-      <h1>Monitor de largura</h1>
-      <p className="metric">{largura}px</p>
-      <p>{largura < 768 ? '📱 Mobile' : '🖥️ Desktop'}</p>
+      <span className="eyebrow">Exercício 02 · useEffect + cleanup</span>
+      <h1>Monitor de largura da janela</h1>
+      <p>Redimensione o navegador e acompanhe a medida:</p>
+      <p className="metric">{largura} px</p>
+      <p>{largura < 768 ? '📱 Tela estreita' : '🖥️ Tela larga'}</p>
+      <p className="muted">Desafio: mostre também window.innerHeight.</p>
     </section>
   );
 }

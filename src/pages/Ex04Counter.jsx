@@ -1,15 +1,18 @@
 import { useCounter } from '../hooks/useCounter.js';
 
-function Contador({ titulo, inicial }) {
-  // Cada chamada possui um estado próprio.
-  const { contador, aumentar, diminuir, zerar } = useCounter(inicial);
+function Contador({ titulo, valorInicial }) {
+  // Cada componente recebe uma instância independente do hook.
+  const { contador, aumentar, diminuir, zerar } = useCounter(valorInicial);
 
   return (
     <div className="subpanel">
-      <h2>{titulo}: {contador}</h2>
-      <button onClick={diminuir}>-1</button>
-      <button onClick={aumentar}>+1</button>
-      <button onClick={zerar}>Restaurar</button>
+      <h2>{titulo}</h2>
+      <p className="metric">{contador}</p>
+      <div className="actions">
+        <button onClick={diminuir}>− 1</button>
+        <button onClick={aumentar}>+ 1</button>
+        <button className="secondary" onClick={zerar}>Restaurar</button>
+      </div>
     </div>
   );
 }
@@ -17,11 +20,14 @@ function Contador({ titulo, inicial }) {
 export default function Ex04Counter() {
   return (
     <section className="panel">
-      <h1>Custom Hook</h1>
+      <span className="eyebrow">Exercício 04 · custom hook</span>
+      <h1>Dois contadores, uma lógica reutilizável</h1>
+      <p>Os controles funcionam separadamente, mesmo usando o mesmo hook.</p>
       <div className="cards">
-        <Contador titulo="A" inicial={0} />
-        <Contador titulo="B" inicial={10} />
+        <Contador titulo="Contador A" valorInicial={0} />
+        <Contador titulo="Contador B" valorInicial={10} />
       </div>
+      <p className="muted">Desafio: acrescente um botão para somar 5.</p>
     </section>
   );
 }
